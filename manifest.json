@@ -10,21 +10,21 @@
   "theme_color": "#C9184A",
   "icons": [
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+CiAgICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjQzkxODRBIi8+CiAgICA8cGF0aCBkPSJNNTAgMjBDNTAgMjAgMjUgNDUgMjUgNjJDMjUgNzYgMzYgODcgNTAgODdDNjQgODcgNzUgNzYgNzUgNjJDNzUgNDUgNTAgMjAgNTAgMjBaIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuOSIvPgogIDwvc3ZnPg==",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+CiAgICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjQzkxODRBIi8+CiAgICA8cGF0aCBkPSJNNTAgMjBDNTAgMjAgMjUgNDUgMjUgNjJDMjUgNzYgMzYgODcgNTAgODdDNjQgODcgNzUgNzYgNzUgNjJDNzUgNDUgNTAgMjAgNTAgMjBaIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuOSIvPgogIDwvc3ZnPg==",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+CiAgICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjQzkxODRBIi8+CiAgICA8cGF0aCBkPSJNNTAgMjBDNTAgMjAgMjUgNDUgMjUgNjJDMjUgNzYgMzYgODcgNTAgODdDNjQgODcgNzUgNzYgNzUgNjJDNzUgNDUgNTAgMjAgNTAgMjBaIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuOSIvPgogIDwvc3ZnPg==",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ]

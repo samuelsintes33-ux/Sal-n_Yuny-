@@ -15,7 +15,7 @@
      ============================================================ -->
 <link rel="icon" id="app-favicon">
 <link rel="apple-touch-icon" id="app-apple-icon">
-<link rel="manifest" id="app-manifest">
+<link rel="manifest" id="app-manifest" href="./manifest.json">
 
 <!-- Fuentes: se cargan si hay conexión; si no, cae a las fuentes del sistema
      definidas en --font-display/--font-body sin romper el layout -->
@@ -3526,65 +3526,36 @@ function generateAppIconSVG(size,bg,fg){
   </svg>`;
 }
 function updateManifest(){
+  // El <link rel="manifest"> ya apunta a manifest.json (archivo real y
+  // estático, necesario para que PWABuilder y otros empaquetadores lo
+  // detecten correctamente). Aquí solo actualizamos el favicon/ícono de
+  // pestaña en vivo según el color elegido por el usuario dentro de la
+  // app ya instalada — esto no afecta el manifest real.
   const bg=CONFIG?.primaryColor||'#C9184A';
   const icon192=generateAppIconSVG(192,bg,'#ffffff');
-  const icon512=generateAppIconSVG(512,bg,'#ffffff');
   const toDataUrl=svg=>'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
-
-  const manifest={
-    name:CONFIG?.businessName||'Nails Studio',
-    short_name:(CONFIG?.businessName||'Nails Studio').slice(0,12),
-    description:'Gestión integral de negocio de uñas — 100% offline',
-    start_url:'./',
-    display:'standalone',
-    orientation:'portrait-primary',
-    background_color:CONFIG?.primaryColor||'#C9184A',
-    theme_color:CONFIG?.primaryColor||'#C9184A',
-    icons:[
-      {src:toDataUrl(icon192),sizes:'192x192',type:'image/svg+xml'},
-      {src:toDataUrl(icon512),sizes:'512x512',type:'image/svg+xml'}
-    ]
-  };
-  const manifestBlob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-  const manifestUrl=URL.createObjectURL(manifestBlob);
-  document.getElementById('app-manifest').setAttribute('href',manifestUrl);
   document.getElementById('app-favicon').setAttribute('href',toDataUrl(icon192));
   document.getElementById('app-apple-icon').setAttribute('href',toDataUrl(icon192));
 }
 
 /* ================================================================
-   MÓDULO: SERVICE WORKER (embebido como Blob — un solo archivo)
+   MÓDULO: SERVICE WORKER
    ================================================================
+   Se registra desde un archivo real (sw.js) en vez de un Blob en
+   memoria — necesario para que empaquetadores como PWABuilder puedan
+   detectarlo correctamente al generar el paquete Android/APK. Antes
+   se generaba como blob:https://... en memoria, lo cual funciona en
+   el navegador pero no es detectable por herramientas de análisis
+   externas.
    Habilita: funcionamiento 100% offline (punto 1) y notificaciones
    locales de recordatorio de citas (mejora #4).
    ================================================================ */
-const SW_SOURCE = `
-  const CACHE_NAME = 'nails-studio-v1';
-  self.addEventListener('install', (e) => { self.skipWaiting(); });
-  self.addEventListener('activate', (e) => { self.clients.claim(); });
-  self.addEventListener('fetch', (e) => {
-    // App de una sola página: siempre servir desde caché de red si está disponible,
-    // y si no hay red, permitir que el navegador use su caché normal.
-    e.respondWith(
-      fetch(e.request).catch(() => caches.match(e.request))
-    );
-  });
-  self.addEventListener('notificationclick', (e) => {
-    e.notification.close();
-    e.waitUntil(self.clients.openWindow('./'));
-  });
-`;
-
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
-  try{
-    const blob=new Blob([SW_SOURCE],{type:'application/javascript'});
-    const swUrl=URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl).catch(()=>{
-      // Si el registro falla (ej. restricciones del entorno), la app sigue
-      // funcionando normalmente sin Service Worker.
-    });
-  }catch(err){ /* silencioso: no bloquea el uso de la app */ }
+  navigator.serviceWorker.register('./sw.js').catch(()=>{
+    // Si el registro falla (ej. restricciones del entorno), la app sigue
+    // funcionando normalmente sin Service Worker.
+  });
 }
 
 /* ================================================================

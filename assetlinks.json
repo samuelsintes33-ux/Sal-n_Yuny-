@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.samuelsintes33_ux.twa",
+        "sha256_cert_fingerprints": ["F4:10:1C:6A:77:E8:F9:AB:D9:38:C3:55:9E:AB:24:71:59:3C:A0:C0:3B:F8:26:CA:B2:39:5B:3F:AD:FA:E8:13"]
+      }
+    }]
